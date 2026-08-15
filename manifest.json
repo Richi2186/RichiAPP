@@ -1,8 +1,11 @@
 {
+{
   "name": "RichiAPP",
   "short_name": "RichiAPP",
-  "start_url": "RichiAPP.html",
-  "display": "standalone",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone"
+}
   "background_color": "#000000",
   "theme_color": "#c99700",
   "icons": [
