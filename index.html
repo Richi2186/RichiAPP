@@ -2,316 +2,369 @@
 <html lang="sk">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RichiAPP</title>
 
-<!-- IKONA -->
+<!-- IKONA A PWA -->
 <link rel="icon" type="image/png" href="icon.png">
 <link rel="apple-touch-icon" href="icon.png">
-
-<meta name="theme-color" content="#1565c0">
 <link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 
 <style>
+:root {
+  --bg-color: #0f172a;
+  --card-bg: #1e293b;
+  --text-main: #f8fafc;
+  --text-sub: #94a3b8;
+  --accent-color: #38bdf8;
+}
+
 body {
-margin:0;
-font-family:Arial, sans-serif;
-background:linear-gradient(135deg,#eef3f8,#dbe9f4);
-user-select:none;
--webkit-tap-highlight-color: transparent;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    padding-bottom: 40px;
 }
 
 /* HEADER */
 .header {
-background:linear-gradient(135deg,#1565c0,#42a5f5);
-color:white;
-padding:30px;
-text-align:center;
-box-shadow:0 5px 20px rgba(0,0,0,0.2);
+    background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+    color: white;
+    padding: 35px 20px 25px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .header h1 {
-margin:10px 0;
-font-size:40px;
+    margin: 10px 0 5px;
+    font-size: 32px;
+    letter-spacing: 1px;
+    font-weight: 800;
 }
 
-/* 👇 LOGO FIX */
+.header p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--text-sub);
+}
+
 .logo {
-width:100px;
-display:block;
-margin:0 auto 10px;
+    width: 75px;
+    height: 75px;
+    display: block;
+    margin: 0 auto 10px;
+    border-radius: 18px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
 #datetime {
-margin-top:10px;
-font-size:16px;
-opacity:0.9;
+    margin-top: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent-color);
 }
 
 /* STATS */
 #stats {
-text-align:center;
-margin-top:10px;
-font-size:14px;
-opacity:0.9;
+    text-align: center;
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--text-sub);
+    word-break: break-word;
 }
 
 /* CONTAINER */
 .container {
-max-width:1300px;
-margin:auto;
-padding:30px;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
 }
 
 /* SEARCH */
 #searchBox {
-width:100%;
-padding:15px;
-border:none;
-border-radius:15px;
-margin:15px 0 25px;
-font-size:16px;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    width: 100%;
+    padding: 16px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    margin: 15px 0 25px;
+    font-size: 16px;
+    background: var(--card-bg);
+    color: white;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    box-sizing: border-box;
+    outline: none;
+    transition: all 0.2s;
+}
+
+#searchBox:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+}
+
+h2 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: var(--text-main);
+    font-size: 20px;
+    font-weight: 700;
 }
 
 /* GRID */
 .grid {
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
 }
 
-a { text-decoration:none; }
+a {
+    text-decoration: none;
+    color: inherit;
+}
 
 /* CARD */
 .card {
-height:130px;
-border-radius:20px;
-color:white;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-font-size:18px;
-font-weight:bold;
-box-shadow:0 10px 25px rgba(0,0,0,0.2);
-transition:0.25s;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 16px 18px;
+    border-radius: 16px;
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
 }
 
 .card:hover {
-transform:translateY(-5px) scale(1.05);
-box-shadow:0 15px 30px rgba(0,0,0,0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.card:active {
+    transform: translateY(-1px);
+}
+
+.card-title {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.3;
 }
 
 .icon {
-font-size:42px;
-margin-bottom:10px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    flex-shrink: 0;
 }
 
-/* COLORS */
-.blue {background:linear-gradient(135deg,#1976d2,#42a5f5);}
-.green {background:linear-gradient(135deg,#43a047,#66bb6a);}
-.orange {background:linear-gradient(135deg,#fb8c00,#ffb74d);}
-.red {background:linear-gradient(135deg,#e53935,#ef5350);}
-.purple {background:linear-gradient(135deg,#8e24aa,#ba68c8);}
-.gold {background:linear-gradient(135deg,#c99700,#ffd54f);}
-.teal {background:linear-gradient(135deg,#00897b,#4db6ac);}
-
-/* EXTRA COLORS */
-.pink {background:linear-gradient(135deg,#d81b60,#f48fb1);}
-.navy {background:linear-gradient(135deg,#0d47a1,#1976d2);}
-.cyan {background:linear-gradient(135deg,#00acc1,#26c6da);}
-.lime {background:linear-gradient(135deg,#7cb342,#c0ca33);}
-.yellow {background:linear-gradient(135deg,#fdd835,#ffee58);}
-.brown {background:linear-gradient(135deg,#6d4c41,#8d6e63);}
-.grey {background:linear-gradient(135deg,#546e7a,#78909c);}
-.indigo {background:linear-gradient(135deg,#3f51b5,#7986cb);}
-.coral {background:linear-gradient(135deg,#f4511e,#ff7043);}
-
-h2 {
-margin-top:40px;
-color:#333;
-}
+/* FAREBNÉ AKCENTY PÁSIKOV */
+.blue { border-left: 5px solid #3b82f6; }
+.green { border-left: 5px solid #22c55e; }
+.orange { border-left: 5px solid #f97316; }
+.red { border-left: 5px solid #ef4444; }
+.purple { border-left: 5px solid #a855f7; }
+.gold { border-left: 5px solid #eab308; }
+.teal { border-left: 5px solid #14b8a6; }
+.pink { border-left: 5px solid #ec4899; }
+.navy { border-left: 5px solid #1d4ed8; }
+.cyan { border-left: 5px solid #06b6d4; }
+.lime { border-left: 5px solid #84cc16; }
+.yellow { border-left: 5px solid #facc15; }
+.brown { border-left: 5px solid #a16207; }
+.grey { border-left: 5px solid #64748b; }
+.indigo { border-left: 5px solid #6366f1; }
+.coral { border-left: 5px solid #f97316; }
 </style>
 </head>
 
 <body>
 
 <div class="header">
-
-<img src="icon.png" class="logo" alt="RichiAPP">
-
-<h1>RichiAPP</h1>
-<p>Správa služieb, pracovníkov a evidencie</p>
-
-<div id="datetime"></div>
-<div id="stats"></div>
-
+  <img src="icon.png" class="logo" alt="RichiAPP">
+  <h1>RichiAPP</h1>
+  <p>Správa služieb, pracovníkov a evidencie</p>
+  <div id="datetime"></div>
+  <div id="stats"></div>
 </div>
 
 <div class="container">
 
-<h2>⭐ Najpoužívanejšie</h2>
+  <h2>⭐ Najpoužívanejšie</h2>
 
-<input type="text" id="searchBox" placeholder="🔍 Hľadať tabuľku..." onkeyup="searchTiles()">
+  <input type="text" id="searchBox" placeholder="🔍 Hľadať tabuľku alebo modul..." onkeyup="searchTiles()">
 
-<div class="grid">
+  <div class="grid">
 
-<a href="https://1drv.ms/x/c/965DD13CD5F22182/IQAovMSa5DWQTotaWReqpDA2AfLEZS8vl6qjY25JFgqK3xI?e=pG8X9O" target="_blank" onclick="countClick('Rozpis2026')">
-<div class="card blue tile">
-<div class="icon">📅</div>
-Rozpis služieb 2026
-</div>
-</a>
+    <a href="https://1drv.ms/x/c/965DD13CD5F22182/IQAovMSa5DWQTotaWReqpDA2AfLEZS8vl6qjY25JFgqK3xI?e=pG8X9O" target="_blank" onclick="countClick('Rozpis2026')" class="tile">
+      <div class="card blue">
+        <div class="icon">📅</div>
+        <div class="card-title">Rozpis služieb 2026</div>
+      </div>
+    </a>
 
-<a href="https://1drv.ms/x/c/965DD13CD5F22182/IQCVE53oK1ooR5jYNywIw_B2AZkLSutySB5Xuh7ibrf8Q0k?e=E2Nzdt" target="_blank" onclick="countClick('Platby2026')">
-<div class="card gold tile">
-<div class="icon">💶</div>
-Platby 2026
-</div>
-</a>
+    <a href="https://1drv.ms/x/c/965DD13CD5F22182/IQCVE53oK1ooR5jYNywIw_B2AZkLSutySB5Xuh7ibrf8Q0k?e=E2Nzdt" target="_blank" onclick="countClick('Platby2026')" class="tile">
+      <div class="card gold">
+        <div class="icon">💶</div>
+        <div class="card-title">Platby 2026</div>
+      </div>
+    </a>
 
-<a href="https://1drv.ms/x/c/965DD13CD5F22182/IQCP2LP1s7wjQZWFLc6PcCteAVLJ_bDVDSV5mKGl_xKxDVk?e=BKzkGr" target="_blank" onclick="countClick('Prijmy')">
-<div class="card green tile">
-<div class="icon">📊</div>
-Príjmy & Výdaje
-</div>
-</a>
+    <a href="https://1drv.ms/x/c/965DD13CD5F22182/IQCP2LP1s7wjQZWFLc6PcCteAVLJ_bDVDSV5mKGl_xKxDVk?e=BKzkGr" target="_blank" onclick="countClick('Prijmy')" class="tile">
+      <div class="card green">
+        <div class="icon">📊</div>
+        <div class="card-title">Príjmy & Výdaje</div>
+      </div>
+    </a>
 
-</div>
+  </div>
 
-<h2>📂 Všetky moduly</h2>
+  <h2>📂 Všetky moduly</h2>
 
-<div class="grid">
+  <div class="grid">
 
-<a href="https://1drv.ms/x/c/965DD13CD5F22182/IQC-ZLTz0R6VSZ6ErpePzViyASBl9ZK9wDViHJuYzP4Sgsg?e=PKE39e" target="_blank" onclick="countClick('Rozpis2027')">
-<div class="card purple tile">
-<div class="icon">📅</div>
-Rozpis služieb 2027
-</div>
-</a>
+    <a href="https://1drv.ms/x/c/965DD13CD5F22182/IQC-ZLTz0R6VSZ6ErpePzViyASBl9ZK9wDViHJuYzP4Sgsg?e=PKE39e" target="_blank" onclick="countClick('Rozpis2027')" class="tile">
+      <div class="card purple">
+        <div class="icon">📅</div>
+        <div class="card-title">Rozpis služieb 2027</div>
+      </div>
+    </a>
 
-<a href="https://1drv.ms/x/c/965DD13CD5F22182/IQDYkWwXGqPHT6nPCiwPGhbwARI7h4xh7AD9_xq3goWJZ7I?e=B8hxfy" target="_blank" onclick="countClick('Nadcasy')">
-<div class="card orange tile">
-<div class="icon">⏰</div>
-Nadčasy
-</div>
-</a>
+    <a href="https://1drv.ms/x/c/965DD13CD5F22182/IQDYkWwXGqPHT6nPCiwPGhbwARI7h4xh7AD9_xq3goWJZ7I?e=B8hxfy" target="_blank" onclick="countClick('Nadcasy')" class="tile">
+      <div class="card orange">
+        <div class="icon">⏰</div>
+        <div class="card-title">Nadčasy</div>
+      </div>
+    </a>
 
-<a href="https://1drv.ms/x/c/965DD13CD5F22182/IQAzWIRJhBMWSIiyzv_12unkAQjZ6bHIod0VnNzxPkjYnEw?e=ffoNAb" target="_blank" onclick="countClick('PN')">
-<div class="card red tile">
-<div class="icon">🧮</div>
-PN & OČR
-</div>
-</a>
+    <a href="https://1drv.ms/x/c/965DD13CD5F22182/IQAzWIRJhBMWSIiyzv_12unkAQjZ6bHIod0VnNzxPkjYnEw?e=ffoNAb" target="_blank" onclick="countClick('PN')" class="tile">
+      <div class="card red">
+        <div class="icon">🧮</div>
+        <div class="card-title">PN & OČR</div>
+      </div>
+    </a>
 
-<a href="https://1drv.ms/x/c/965DD13CD5F22182/IQACfMWYft_iSKLt8VixsvPOAX5kWf-5-p7iOn7ZDqkQdxs?e=4e0xP9" target="_blank" onclick="countClick('Vyplaty')"> 
-<div class="card gold tile">
-<div class="icon">💰</div> 
-Výpočet výplat 
-</div> 
-</a>
+    <a href="https://1drv.ms/x/c/965DD13CD5F22182/IQACfMWYft_iSKLt8VixsvPOAX5kWf-5-p7iOn7ZDqkQdxs?e=4e0xP9" target="_blank" onclick="countClick('Vyplaty')" class="tile">
+      <div class="card gold">
+        <div class="icon">💰</div>
+        <div class="card-title">Výpočet výplat</div>
+      </div>
+    </a>
 
-<a href="https://1drv.ms/x/c/965DD13CD5F22182/IQAoW7jwbg3URopM-qpraE-aAWTb4Kto3AytrVZR5AicQMo?e=ydKT5g" target="_blank" onclick="countClick('výplaty _ evidencia')"> 
-<div class="card lime tile"> 
-<div class="icon">🏖️</div> 
-výplaty _ evidencia 
-</div> 
-</a>
+    <a href="https://1drv.ms/x/c/965DD13CD5F22182/IQAoW7jwbg3URopM-qpraE-aAWTb4Kto3AytrVZR5AicQMo?e=ydKT5g" target="_blank" onclick="countClick('výplaty _ evidencia')" class="tile">
+      <div class="card lime">
+        <div class="icon">🏖️</div>
+        <div class="card-title">Výplaty _ evidencia</div>
+      </div>
+    </a>
 
-<a href="https://1drv.ms/x/c/965DD13CD5F22182/IQBxf8HoSe1NTJobbd-oNNf2AZRG1fyXBhJuuqLKl8H-YF8?e=0Gi4hm" target="_blank" onclick="countClick('Dovolenka')"> 
-<div class="card orange tile"> 
-<div class="icon">🏖️</div> 
-Dovolenka 
-</div> 
-</a>
+    <a href="https://1drv.ms/x/c/965DD13CD5F22182/IQBxf8HoSe1NTJobbd-oNNf2AZRG1fyXBhJuuqLKl8H-YF8?e=0Gi4hm" target="_blank" onclick="countClick('Dovolenka')" class="tile">
+      <div class="card orange">
+        <div class="icon">🏖️</div>
+        <div class="card-title">Dovolenka</div>
+      </div>
+    </a>
 
-<a href="https://1drv.ms/x/c/965DD13CD5F22182/IQAHJ13RfOTaRqmPrBN-qeMcAUVouTXsGe91-ZcCVBvlkzc?e=U0XauC" target="_blank" onclick="countClick('Volno')"> 
-<div class="card purple tile"> 
-<div class="icon">📝</div> 
-Zákonné voľno 
-</div> 
-</a> 
+    <a href="https://1drv.ms/x/c/965DD13CD5F22182/IQAHJ13RfOTaRqmPrBN-qeMcAUVouTXsGe91-ZcCVBvlkzc?e=U0XauC" target="_blank" onclick="countClick('Volno')" class="tile">
+      <div class="card purple">
+        <div class="icon">📝</div>
+        <div class="card-title">Zákonné voľno</div>
+      </div>
+    </a>
 
-<a href="https://1drv.ms/x/c/965DD13CD5F22182/IQAzPqxgDctoR5aNtRl85FMrAbvvmHqkQ_cx8CXGrh0yoCw?e=U0dZTK" target="_blank" onclick="countClick('Sluzby')"> 
-<div class="card green tile"> 
-<div class="icon">📋</div> 
-Služby 2026 
-</div> 
-</a> 
+    <a href="https://1drv.ms/x/c/965DD13CD5F22182/IQAzPqxgDctoR5aNtRl85FMrAbvvmHqkQ_cx8CXGrh0yoCw?e=U0dZTK" target="_blank" onclick="countClick('Sluzby')" class="tile">
+      <div class="card green">
+        <div class="icon">📋</div>
+        <div class="card-title">Služby 2026</div>
+      </div>
+    </a>
 
-<a href="https://1drv.ms/x/c/965DD13CD5F22182/IQDOlo2cbwvDSYY3p7CMuSmdAauGFrWma9jZY9yGYwhwfUE?e=MPc3my" target="_blank" onclick="countClick('Pracovnici')"> 
-<div class="card purple tile"> 
-<div class="icon">👥</div> 
-Pracovníci dispečingu 
-</div> 
-</a> 
+    <a href="https://1drv.ms/x/c/965DD13CD5F22182/IQDOlo2cbwvDSYY3p7CMuSmdAauGFrWma9jZY9yGYwhwfUE?e=MPc3my" target="_blank" onclick="countClick('Pracovnici')" class="tile">
+      <div class="card purple">
+        <div class="icon">👥</div>
+        <div class="card-title">Pracovníci dispečingu</div>
+      </div>
+    </a>
 
-<a href="https://mapa.zsr.sk/index.aspx" target="_blank">
-<div class="card indigo tile">
-<div class="icon">🚆</div>
-Mapa vlakov
-</div>
-</a>
+    <a href="https://mapa.zsr.sk/index.aspx" target="_blank" onclick="countClick('Mapa Vlakov')" class="tile">
+      <div class="card indigo">
+        <div class="icon">🚆</div>
+        <div class="card-title">Mapa vlakov</div>
+      </div>
+    </a>
 
-<a href="https://babitron.kam.mff.cuni.cz/zponline.html" target="_blank">
-<div class="card lime tile">
-<div class="icon">🚆</div>
-Vlaky CZ
-</div>
-</a>
+    <a href="https://babitron.kam.mff.cuni.cz/zponline.html" target="_blank" onclick="countClick('Vlaky CZ')" class="tile">
+      <div class="card lime">
+        <div class="icon">🚆</div>
+        <div class="card-title">Vlaky CZ</div>
+      </div>
+    </a>
 
-<a href="https://1drv.ms/x/c/965DD13CD5F22182/IQB4rWvni7wcSZre8jyitRH3AfVr-kMch1VdITtVTx3ahss?e=2Sg5SJ" target="_blank" onclick="countClick('Školské pomôcky Rišenko')">
-<div class="card lime tile">
-<div class="icon">💶</div>
-Školské pomôcky Rišenko
-</div>
-</a>
+    <a href="https://1drv.ms/x/c/965DD13CD5F22182/IQB4rWvni7wcSZre8jyitRH3AfVr-kMch1VdITtVTx3ahss?e=2Sg5SJ" target="_blank" onclick="countClick('Školské pomôcky Rišenko')" class="tile">
+      <div class="card lime">
+        <div class="icon">💶</div>
+        <div class="card-title">Školské pomôcky Rišenko</div>
+      </div>
+    </a>
 
-</div>
-
+  </div>
 </div>
 
 <script>
 function updateTime() {
-let now = new Date();
-document.getElementById("datetime").innerHTML =
-"📅 " + now.toLocaleDateString("sk-SK") +
-" | 🕒 " + now.toLocaleTimeString("sk-SK");
+    let now = new Date();
+    document.getElementById("datetime").innerHTML =
+        "📅 " + now.toLocaleDateString("sk-SK") +
+        " | 🕒 " + now.toLocaleTimeString("sk-SK");
 }
 
-setInterval(updateTime,1000);
+setInterval(updateTime, 1000);
 updateTime();
 
 /* STATS */
 function countClick(name) {
-let data = JSON.parse(localStorage.getItem("stats")) || {};
-data[name] = (data[name] || 0) + 1;
-localStorage.setItem("stats", JSON.stringify(data));
-showStats();
+    let data = JSON.parse(localStorage.getItem("stats")) || {};
+    data[name] = (data[name] || 0) + 1;
+    localStorage.setItem("stats", JSON.stringify(data));
+    showStats();
 }
 
 function showStats() {
-let data = JSON.parse(localStorage.getItem("stats")) || {};
-let output = "📊 Kliknutia: ";
-for (let key in data) {
-output += key + ": " + data[key] + " | ";
-}
-document.getElementById("stats").innerHTML = output;
+    let data = JSON.parse(localStorage.getItem("stats")) || {};
+    let output = "📊 Kliknutia: ";
+    let hasData = false;
+
+    for (let key in data) {
+        output += key + ": " + data[key] + " | ";
+        hasData = true;
+    }
+
+    document.getElementById("stats").innerHTML = hasData ? output : "";
 }
 
 showStats();
 
 /* SEARCH */
 function searchTiles() {
-let filter = document.getElementById("searchBox").value.toLowerCase();
-let tiles = document.querySelectorAll(".tile");
+    let filter = document.getElementById("searchBox").value.toLowerCase();
+    let tiles = document.querySelectorAll(".tile");
 
-tiles.forEach(tile => {
-tile.style.display =
-tile.innerText.toLowerCase().includes(filter) ? "" : "none";
-});
+    tiles.forEach(tile => {
+        tile.style.display = tile.innerText.toLowerCase().includes(filter) ? "" : "none";
+    });
 }
 </script>
 
